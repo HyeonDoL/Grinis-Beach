@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 
+public enum PlayerState
+{
+    Idle,
+    Run,
+    Dash,
+    Shot,
+    Die
+}
+
 public class PlayerControl : MonoBehaviour
 {
-    public enum PlayerState
-    {
-        Idle,
-        Run,
-        Dash,
-        Shot,
-        Die
-    }
-
     [SerializeField]
-    private Animator playerAni;
+    private PlayerAnimation playerAni;
 
     [SerializeField]
     private PlayerMove playerMove;
@@ -46,6 +46,8 @@ public class PlayerControl : MonoBehaviour
     {
         if (state != PlayerState.Idle)
             return;
+
+        playerAni.ChangeAni(PlayerState.Idle);
     }
 
     private void Run()
@@ -53,7 +55,9 @@ public class PlayerControl : MonoBehaviour
         if (state != PlayerState.Run)
             return;
 
-        
+        playerMove.Run(horizontal, vertical);
+
+        playerAni.ChangeAni(PlayerState.Run);
     }
 
     private void Dash()
