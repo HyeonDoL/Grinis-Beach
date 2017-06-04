@@ -5,12 +5,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private PlayerDataContainer container;
 
-    [SerializeField]
-    private string name;
-
-    [SerializeField]
-    private CharacterSheet sheet;
-
     private CharacterData data;
 
     private Rigidbody playerRigid;
@@ -21,14 +15,7 @@ public class PlayerMove : MonoBehaviour
     {
         playerRigid = container.PlayerRigid;
 
-        for(int count = 0; count < sheet.m_data.Count; count++)
-        {
-            if (sheet.m_data[count].name == name)
-            {
-                data = sheet.m_data[count];
-                break;
-            }
-        }
+        data = container.Data;
 
         moveSpeed = data.move.moveSpeed;
         rotateSpeed = data.move.rotateSpeed;
