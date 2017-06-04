@@ -8,10 +8,10 @@ public class SelectPlayer : MonoBehaviour
     [SerializeField]
     private Text UnitName;
     [SerializeField]
-    private Image UnitImage;
+    private GameObject UnitModel;
 
     [SerializeField]
-    private SpriteContainer UnitImageContainer;
+    private MenuUnitContainer UnitImageContainer;
 
     [SerializeField]
     private CharacterSheet UnitSheet;
@@ -29,19 +29,22 @@ public class SelectPlayer : MonoBehaviour
     private Image[] HealthPoints;
 
     private int index;
-
+    public int Index
+    {
+        get { return index; }
+        set { index = value >= 0 ? value % UnitSheet.m_data.Count : UnitSheet.m_data.Count + value; }
+    }
 
 
     void Awake()
     {
-        index = 0;
+        Index = 0;
         this.SelectedUnitUpdate();
     }
 
     public void OnClickArrow(int add)
     {
-        index += Mathf.RoundToInt(Mathf.Sign(add));
-        index %= UnitSheet.m_data.Count;
+        Index += Mathf.RoundToInt(Mathf.Sign(add));
         SelectedUnitUpdate();
     }
 
@@ -50,12 +53,12 @@ public class SelectPlayer : MonoBehaviour
         SetPointsToZero();
         for (int i = 0; i < UnitSheet.m_data.Count; ++i)
         {
-            if (index == i)
+            if (Index == i)
             {
                 string name = UnitSheet.m_data[i].name;
                 UnitName.text = name;
                 GameManager.Instance.selectedPlayableUnityName = name;
-                UnitImage.sprite = UnitImageContainer[i];
+                UnitModel = GameObject.Instantiate(UnitImageContainer[i]);
                 for (int j = 0; j < UnitSheet.m_data[i].hp; ++j) HealthPoints[j].enabled = true;
                 for (int j = 0; j < UnitSheet.m_data[i].move.moveSpeed; ++j) speeds[j].enabled = true;
                 for (int j = 0; j < UnitSheet.m_data[i].displayOnlyAttackPoint; ++j) attacks[j].enabled = true;
