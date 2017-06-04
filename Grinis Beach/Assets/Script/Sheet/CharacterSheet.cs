@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -7,6 +8,7 @@ using UnityEditor;
 [Serializable]
 public class CharacterData
 {
+    [TextArea]
     public string name;
     public int hp;
 
