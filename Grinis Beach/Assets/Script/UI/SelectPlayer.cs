@@ -60,8 +60,8 @@ public class SelectPlayer : MonoBehaviour
                 UnitName.text = UnitSheet.m_data[i].name;
                 UnitImage.sprite = UnitImageContainer[i];
                 for (int j = 0; j < UnitSheet.m_data[i].hp; ++j) HealthPoints[j].enabled = true;
-                for (int j = 0; j < UnitSheet.m_data[i].speed.moveSpeed; ++j) speeds[j].enabled = true;
-                //for (int j = 0; j < UnitSheet.m_data[i].; ++j) attacks[j].enabled = true;
+                for (int j = 0; j < UnitSheet.m_data[i].move.moveSpeed; ++j) speeds[j].enabled = true;
+                for (int j = 0; j < UnitSheet.m_data[i].displayOnlyAttackPoint; ++j) attacks[j].enabled = true;
             }
         }
     }
