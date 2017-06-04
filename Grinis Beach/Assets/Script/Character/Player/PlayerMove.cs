@@ -5,8 +5,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private PlayerDataContainer container;
 
-    private CharacterData data;
-
     private Rigidbody playerRigid;
 
     private float moveSpeed, rotateSpeed;
@@ -15,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     {
         playerRigid = container.PlayerRigid;
 
-        data = container.Data;
+        CharacterData data = container.Data;
 
         moveSpeed = data.move.moveSpeed;
         rotateSpeed = data.move.rotateSpeed;

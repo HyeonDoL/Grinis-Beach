@@ -12,6 +12,8 @@ public class CharacterData
     public string name;
     public int hp;
 
+    public GameObject prefab;
+
     // 캐릭터 선택창에 띄울 공격력 수치
     public int displayOnlyAttackPoint;
 
@@ -28,9 +30,9 @@ public class CharacterData
     [Serializable]
     public struct Dash
     {
-        public float dashSpeed;
-        public float dashDistance;
-        public float dashGap;
+        public float speed;
+        public float distance;
+        public float gap;
     }
 }
 

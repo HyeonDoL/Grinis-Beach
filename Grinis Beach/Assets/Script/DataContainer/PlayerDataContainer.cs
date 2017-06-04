@@ -34,7 +34,7 @@ public class PlayerDataContainer : MonoBehaviour
 
     public Rigidbody PlayerRigid { get { return this.playerRigid; } } 
 
-    public string Name { get { return this.name; } set { this.name = value} }
+    public string Name { get { return this.name; } set { this.name = value; } }
 
     public CharacterData Data { get { return this.data; } }
 }
