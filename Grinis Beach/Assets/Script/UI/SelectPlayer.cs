@@ -30,16 +30,10 @@ public class SelectPlayer : MonoBehaviour
 
     private int index;
 
-    private float attack;
-
-    private float speed;
-
-    private float HP;
 
 
     void Awake()
     {
-        attack = speed = HP = 0;
         index = 0;
         this.SelectedUnitUpdate();
     }
@@ -53,16 +47,25 @@ public class SelectPlayer : MonoBehaviour
 
     private void SelectedUnitUpdate()
     {
+        SetPointsToZero();
         for (int i = 0; i < UnitSheet.m_data.Count; ++i)
         {
-            if(index == i)
+            if (index == i)
             {
-                UnitName.text = UnitSheet.m_data[i].name;
+                string name = UnitSheet.m_data[i].name;
+                UnitName.text = name;
+                GameManager.Instance.selectedPlayableUnityName = name;
                 UnitImage.sprite = UnitImageContainer[i];
                 for (int j = 0; j < UnitSheet.m_data[i].hp; ++j) HealthPoints[j].enabled = true;
                 for (int j = 0; j < UnitSheet.m_data[i].move.moveSpeed; ++j) speeds[j].enabled = true;
                 for (int j = 0; j < UnitSheet.m_data[i].displayOnlyAttackPoint; ++j) attacks[j].enabled = true;
             }
         }
+    }
+    private void SetPointsToZero()
+    {
+        for (int i = 0; i < speeds.Length; ++i) speeds[i].enabled = false;
+        for (int i = 0; i < attacks.Length; ++i) attacks[i].enabled = false;
+        for (int i = 0; i < HealthPoints.Length; ++i) HealthPoints[i].enabled = false;
     }
 }
