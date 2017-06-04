@@ -6,16 +6,32 @@ public class PlayerMove : MonoBehaviour
     private PlayerDataContainer container;
 
     [SerializeField]
-    private float moveSpeed;
+    private string name;
 
     [SerializeField]
-    private float rotateSpeed;
+    private CharacterSheet sheet;
+
+    private CharacterData data;
 
     private Rigidbody playerRigid;
+
+    private float moveSpeed, rotateSpeed;
 
     private void Awake()
     {
         playerRigid = container.PlayerRigid;
+
+        for(int count = 0; count < sheet.m_data.Count; count++)
+        {
+            if (sheet.m_data[count].name == name)
+            {
+                data = sheet.m_data[count];
+                break;
+            }
+        }
+
+        moveSpeed = data.move.moveSpeed;
+        rotateSpeed = data.move.rotateSpeed;
     }
 
     public void Run(float horizontal, float vertical)

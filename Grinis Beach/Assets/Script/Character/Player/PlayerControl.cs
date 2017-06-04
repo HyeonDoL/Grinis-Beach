@@ -64,5 +64,9 @@ public class PlayerControl : MonoBehaviour
     {
         if (state != PlayerState.Dash)
             return;
+
+        
+
+        playerAni.ChangeAni(PlayerState.Dash);
     }
 }
