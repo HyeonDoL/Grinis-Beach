@@ -17,6 +17,11 @@ public class HPManager : MonoBehaviour
     private SpriteContainer spriteContainer;
     
     private int MaxHP;
+    public int MAXHP
+    {
+        get { return MaxHP; }
+        set { MaxHP = value; OnValueChanged(); }
+    }
 
     private int healthPoint;
     public int HealthPoint
