@@ -12,13 +12,30 @@ public class GunData
 
     public GameObject bullet;
 
+    public GunType type;
+
+    public GunInfo gunInfo;
     public BulletInfo bulletInfo;
+
+    public enum GunType
+    {
+        Auto,
+        SemiAuto
+    }
 
     [Serializable]
     public struct BulletInfo
     {
-        public float damage;
+        public int damage;
         public float speed;
+        public int knockback;
+    }
+
+    [Serializable]
+    public struct GunInfo
+    {
+        public float reloadSpeed;
+        public float magazine;
     }
 }
 

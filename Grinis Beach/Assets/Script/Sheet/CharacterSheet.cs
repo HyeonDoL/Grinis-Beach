@@ -10,6 +10,9 @@ public class CharacterData
 {
     [TextArea]
     public string name;
+    [TextArea]
+    public string introduction;
+
     public int hp;
 
     public GameObject model;
@@ -20,6 +23,10 @@ public class CharacterData
     public int displayonlySpeed
     {
         get { return Mathf.RoundToInt((move.moveSpeed - 4) * 2f); }
+    }
+    public float displayonlyHp
+    {
+        get { return hp * 0.5f; }
     }
 
     public Move move;
