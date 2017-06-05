@@ -17,6 +17,12 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     private PlayerMove playerMove;
 
+    [SerializeField]
+    private PlayerDash playerDash;
+
+    [SerializeField]
+    private PlayerShot playerShot;
+
     private float horizontal, vertical;
 
     private PlayerState state;
@@ -31,7 +37,7 @@ public class PlayerControl : MonoBehaviour
         if (horizontal != 0 || vertical != 0)
             state = PlayerState.Run;
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) || playerDash.IsDash)
             state = PlayerState.Dash;
     }
 
@@ -62,11 +68,21 @@ public class PlayerControl : MonoBehaviour
 
     private void Dash()
     {
-        if (state != PlayerState.Dash)
+        if ((state != PlayerState.Dash || !playerDash.IsCanDash))
             return;
 
-        
+        playerDash.Dash();
 
         playerAni.ChangeAni(PlayerState.Dash);
+    }
+
+    private void Shot()
+    {
+        if (state != PlayerState.Shot)
+            return;
+
+        playerShot.Shot();
+
+        playerAni.ChangeAni(PlayerState.Shot);
     }
 }

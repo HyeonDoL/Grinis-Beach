@@ -12,7 +12,7 @@ public class CharacterData
     public string name;
     public int hp;
 
-    public GameObject prefab;
+    public GameObject model;
 
     // 캐릭터 선택창에 띄울 공격력 수치
     public int displayOnlyAttackPoint;
