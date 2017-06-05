@@ -59,4 +59,9 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    public void END()
+    {
+        AutoFade.LoadLevel("menu", 2, 2, Color.gray);
+    }
+
 }

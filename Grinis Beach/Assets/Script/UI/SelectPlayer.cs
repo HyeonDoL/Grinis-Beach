@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class SelectPlayer : MonoBehaviour
 {
@@ -30,6 +30,8 @@ public class SelectPlayer : MonoBehaviour
     [SerializeField]
     private Image[] HealthPoints;
 
+    private Dictionary<int, GameObject> Units;
+
     private int index;
     public int Index
     {
@@ -40,6 +42,7 @@ public class SelectPlayer : MonoBehaviour
 
     void OnEnable()
     {
+        Units = new Dictionary<int, GameObject>();
         UnitSheet = GameManager.Instance.CharacterSheet_readonly;
         index = 0;
     }
@@ -64,11 +67,29 @@ public class SelectPlayer : MonoBehaviour
                 UnitName.text = name;
                 UnitStory.text = name;
                 GameManager.Instance.selectedPlayableUnit = new GameManager.Pair(i,name);
-                UnitModel = PrefabUtility.ConnectGameObjectToPrefab(UnitModel,UnitPrefabContainer[i]);
+
+                SetUnitObjectAllFalse();
+                if (!Units.TryGetValue(i, out UnitModel))
+                {
+                    UnitModel = GameObject.Instantiate(UnitPrefabContainer[i]);
+                    Units.Add(i, UnitModel);
+                }
+                else
+                {
+                    Units[i].SetActive(true);
+                }
+
                 for (int j = 0; j < UnitSheet.m_data[i].displayonlyHp; ++j) HealthPoints[j].enabled = true;
                 for (int j = 0; j < UnitSheet.m_data[i].displayonlySpeed; ++j) speeds[j].enabled = true;
                 for (int j = 0; j < UnitSheet.m_data[i].displayOnlyAttackPoint; ++j) attacks[j].enabled = true;
             }
+        }
+    }
+    private void SetUnitObjectAllFalse()
+    {
+        for (int i=0;i<Units.Count;++i)
+        {
+            Units[i].SetActive(false);
         }
     }
     private void SetPointsToZero()
