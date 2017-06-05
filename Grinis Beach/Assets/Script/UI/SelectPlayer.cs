@@ -40,9 +40,11 @@ public class SelectPlayer : MonoBehaviour
     void Awake()
     {
         Index = 0;
+    }
+    void Start()
+    {
         this.SelectedUnitUpdate();
     }
-
     public void OnClickArrow(int add)
     {
         Index += Mathf.RoundToInt(Mathf.Sign(add));
