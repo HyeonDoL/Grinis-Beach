@@ -8,19 +8,33 @@ public class HPManager : MonoBehaviour
     [SerializeField]
     private Image[] HPs;
 
+    [SerializeField]
+    private Image ShellImage;
+
     private CharacterSheet characterSheet;
 
     [SerializeField]
     private SpriteContainer spriteContainer;
-
+    
     private int MaxHP;
+
     private int healthPoint;
     public int HealthPoint
     {
         get { return healthPoint; }
         set { healthPoint = value < MaxHP ? value : MaxHP; this.OnValueChanged(); }
     }
-    private int Shell;
+
+    private bool shell;
+    public bool Shell
+    {
+        get { return shell; }
+        set { shell = value; ShellImage.enabled = value; }
+    }
+    void Awake()
+    {
+        GameManager.Instance.HPManager_readonly = this;
+    }
 
     void OnEnable()
     {

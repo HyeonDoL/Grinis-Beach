@@ -65,7 +65,7 @@ public class SelectPlayer : MonoBehaviour
                 UnitStory.text = name;
                 GameManager.Instance.selectedPlayableUnit = new GameManager.Pair(i,name);
                 UnitModel = PrefabUtility.ConnectGameObjectToPrefab(UnitModel,UnitPrefabContainer[i]);
-                for (int j = 0; j < UnitSheet.m_data[i].hp; ++j) HealthPoints[j].enabled = true;
+                for (int j = 0; j < UnitSheet.m_data[i].displayonlyHp; ++j) HealthPoints[j].enabled = true;
                 for (int j = 0; j < UnitSheet.m_data[i].displayonlySpeed; ++j) speeds[j].enabled = true;
                 for (int j = 0; j < UnitSheet.m_data[i].displayOnlyAttackPoint; ++j) attacks[j].enabled = true;
             }

@@ -43,6 +43,12 @@ public class GameManager : MonoBehaviour
         set { if (!gunSheet) gunSheet = value; }
     }
 
+    private HPManager HPManager = null;
+    public HPManager HPManager_readonly
+    {
+        get { return HPManager; }
+        set { if (!HPManager) HPManager = value; }
+    }
     public Pair selectedPlayableUnit;
 
     [Obsolete("Property selectedPlayableUnityName has been deprecated. Use selectedPlayableUnit.name instead.", true)]

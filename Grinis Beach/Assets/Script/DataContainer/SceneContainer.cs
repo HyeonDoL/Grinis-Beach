@@ -1,7 +1,7 @@
 ﻿using System;
 public enum SceneContainer 
 {
-    Test,
+    InGame,
     Menu,
     Title
 
