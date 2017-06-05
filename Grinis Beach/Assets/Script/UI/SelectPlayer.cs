@@ -84,6 +84,7 @@ public class SelectPlayer : MonoBehaviour
                 for (int j = 0; j < UnitSheet.m_data[i].displayOnlyAttackPoint; ++j) attacks[j].enabled = true;
             }
         }
+        
     }
     private void SetUnitObjectAllFalse()
     {
