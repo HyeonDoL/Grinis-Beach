@@ -17,6 +17,11 @@ public class CharacterData
     // 캐릭터 선택창에 띄울 공격력 수치
     public int displayOnlyAttackPoint;
 
+    public int displayonlySpeed
+    {
+        get { return Mathf.RoundToInt((move.moveSpeed - 4) * 2f); }
+    }
+
     public Move move;
     public Dash dash;
 
