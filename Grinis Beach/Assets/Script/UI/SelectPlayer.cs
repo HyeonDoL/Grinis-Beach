@@ -65,7 +65,7 @@ public class SelectPlayer : MonoBehaviour
             {
                 string name = UnitSheet.m_data[i].name;
                 UnitName.text = name;
-                UnitStory.text = name;
+                UnitStory.text = UnitSheet.m_data[i].introduction;
                 GameManager.Instance.selectedPlayableUnit = new GameManager.Pair(i,name);
 
                 SetUnitObjectAllFalse();
