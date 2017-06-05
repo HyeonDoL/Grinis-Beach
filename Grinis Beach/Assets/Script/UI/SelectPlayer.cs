@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class SelectPlayer : MonoBehaviour
     private GameObject UnitModel;
 
     [SerializeField]
-    private MenuUnitContainer UnitImageContainer;
+    private MenuUnitContainer UnitPrefabContainer;
 
     [SerializeField]
     private CharacterSheet UnitSheet;
@@ -58,7 +59,7 @@ public class SelectPlayer : MonoBehaviour
                 string name = UnitSheet.m_data[i].name;
                 UnitName.text = name;
                 GameManager.Instance.selectedPlayableUnityName = name;
-                UnitModel = GameObject.Instantiate(UnitImageContainer[i]);
+                UnitModel = PrefabUtility.ConnectGameObjectToPrefab(UnitModel,UnitPrefabContainer[i]);
                 for (int j = 0; j < UnitSheet.m_data[i].hp; ++j) HealthPoints[j].enabled = true;
                 for (int j = 0; j < UnitSheet.m_data[i].move.moveSpeed; ++j) speeds[j].enabled = true;
                 for (int j = 0; j < UnitSheet.m_data[i].displayOnlyAttackPoint; ++j) attacks[j].enabled = true;
