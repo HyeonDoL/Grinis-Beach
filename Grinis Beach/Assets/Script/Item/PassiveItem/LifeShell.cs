@@ -3,6 +3,6 @@ public class LifeShell : PassiveItem
 {
     public override void Ability()
     {
-        // Add One Life Shell
+        GameManager.Instance.HPManager_readonly.MAXHP += 1;
     }
 }
