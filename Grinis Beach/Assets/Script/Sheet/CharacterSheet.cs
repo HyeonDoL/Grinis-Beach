@@ -15,6 +15,8 @@ public class CharacterData
 
     public int hp;
 
+    public int bomb;
+
     public GameObject model;
 
     // 캐릭터 선택창에 띄울 공격력 수치
