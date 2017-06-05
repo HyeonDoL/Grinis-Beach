@@ -9,12 +9,13 @@ public class SelectPlayer : MonoBehaviour
     [SerializeField]
     private Text UnitName;
     [SerializeField]
+    private Text UnitStory;
+    [SerializeField]
     private GameObject UnitModel;
 
     [SerializeField]
     private MenuUnitContainer UnitPrefabContainer;
 
-    [SerializeField]
     private CharacterSheet UnitSheet;
 
     [Header("Left is First")]
@@ -37,9 +38,10 @@ public class SelectPlayer : MonoBehaviour
     }
 
 
-    void Awake()
+    void OnEnable()
     {
-        Index = 0;
+        UnitSheet = GameManager.Instance.CharacterSheet_readonly;
+        index = 0;
     }
     void Start()
     {
@@ -60,10 +62,11 @@ public class SelectPlayer : MonoBehaviour
             {
                 string name = UnitSheet.m_data[i].name;
                 UnitName.text = name;
-                GameManager.Instance.selectedPlayableUnityName = name;
+                UnitStory.text = name;
+                GameManager.Instance.selectedPlayableUnit = new GameManager.Pair(i,name);
                 UnitModel = PrefabUtility.ConnectGameObjectToPrefab(UnitModel,UnitPrefabContainer[i]);
                 for (int j = 0; j < UnitSheet.m_data[i].hp; ++j) HealthPoints[j].enabled = true;
-                for (int j = 0; j < UnitSheet.m_data[i].move.moveSpeed; ++j) speeds[j].enabled = true;
+                for (int j = 0; j < UnitSheet.m_data[i].displayonlySpeed; ++j) speeds[j].enabled = true;
                 for (int j = 0; j < UnitSheet.m_data[i].displayOnlyAttackPoint; ++j) attacks[j].enabled = true;
             }
         }
