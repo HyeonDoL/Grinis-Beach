@@ -37,6 +37,9 @@ public class PlayerControl : MonoBehaviour
         if (horizontal != 0 || vertical != 0)
             state = PlayerState.Run;
 
+        if (Input.GetMouseButtonDown(0))
+            state = PlayerState.Shot;
+
         if (Input.GetMouseButtonDown(1) || playerDash.IsDash)
             state = PlayerState.Dash;
     }
@@ -45,7 +48,8 @@ public class PlayerControl : MonoBehaviour
     {
         Idle();
         Run();
-        Dash();   
+        Dash();
+        Shot();
     }
 
     private void Idle()
