@@ -25,6 +25,8 @@ public class GunData
         SemiAuto
     }
 
+    public GunFire fire;
+
     [Serializable]
     public struct BulletInfo
     {
