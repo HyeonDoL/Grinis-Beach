@@ -11,14 +11,38 @@ public class SendDetectInfo : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (!GetCurrentSend(other.gameObject))
+            return;
         target.OnChildTriggerEnter(myType, other);
     }
+
     void OnTriggerStay(Collider other)
     {
+        if (!GetCurrentSend(other.gameObject))
+            return;
         target.OnChildTriggerStay(myType, other);
     }
+
     void OnTriggerExit(Collider other)
     {
+        if (!GetCurrentSend(other.gameObject))
+            return;
         target.OnChildTriggerExit(myType, other);
+    }
+
+    private bool GetCurrentSend(GameObject obj)
+    {
+        switch (myType)
+        {
+            case AITriggerType.DetectBox:
+                if (obj.layer == LayerMask.NameToLayer("Player")) { return true; }
+                break;
+            case AITriggerType.Bullet:
+                if (obj.layer == LayerMask.NameToLayer("Bullet_Player")) { return true; }
+                break;
+            default: break;
+        }
+        return false;
+
     }
 }

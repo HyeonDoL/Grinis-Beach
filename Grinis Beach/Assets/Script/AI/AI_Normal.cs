@@ -8,9 +8,11 @@ public class AI_Normal : AI
     private float DetectDistance;
     [SerializeField]
     private Collider Detector;
+    private bool isStopMove;
 
     protected override void Awake()
     {
+        NavMeshAgent_script.speed = Speed;
         isCanUsingAttack = true;
     }
     void OnEnable()
@@ -32,15 +34,22 @@ public class AI_Normal : AI
             return;
         }
         isCanUsingAttack = false;
+        isStopMove = true;
+        NavMeshAgent_script.velocity = Vector3.zero;
+
+        Invoke("SetTimerToZero_Stopmove", 0.8f);
         Invoke("SetTimerToZero_Attack", AttackCoolTime);
+
         Vector3 Direction = PlayerTransform.position - myTransform.position;
         //todo : SHOOT!!!!
         GameObject test =  GameObject.CreatePrimitive(PrimitiveType.Sphere);
         test.SetActive(false);
         test.transform.position = this.transform.position;
         test.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        test.AddComponent<Rigidbody>().velocity = Direction.normalized * 10f;
+        test.AddComponent<Rigidbody>().useGravity = false;
+        test.GetComponent<Rigidbody>().velocity = Direction.normalized * 10f;
         test.SetActive(true);
+        //
 
     }
     protected override void Spawn()
@@ -50,7 +59,7 @@ public class AI_Normal : AI
 
     protected override void Move()
     {
-        if (!isCanMove)
+        if (!isCanMove || isStopMove)
             return;
         NavMeshAgent_script.destination = PlayerTransform.position;
     }
@@ -58,6 +67,10 @@ public class AI_Normal : AI
     private void SetTimerToZero_Attack()
     {
         isCanUsingAttack = true;
+    }
+    private void SetTimerToZero_Stopmove()
+    {
+        isStopMove = false;
     }
 
 

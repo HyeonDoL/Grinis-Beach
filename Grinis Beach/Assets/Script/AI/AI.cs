@@ -51,6 +51,13 @@ public abstract class AI : MonoBehaviour
     [SerializeField]
     protected float HealthPoint;
 
+    [SerializeField]
+    protected float Speed;
+
+    [SerializeField]
+    protected float AttackPoint;
+
+
     protected float HP
     {
         get { return HealthPoint; }
