@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HPManager : MonoBehaviour
+public class InGameUIManager : MonoBehaviour
 {
     [SerializeField]
     private Image[] HPs;
 
     [SerializeField]
     private Image ShellImage;
+
+    [SerializeField]
+    private Text MonsterCount;
+
+    [SerializeField]
+    private Text PearlCount;
 
     private CharacterSheet characterSheet;
 
@@ -20,14 +26,14 @@ public class HPManager : MonoBehaviour
     public int MAXHP
     {
         get { return MaxHP; }
-        set { MaxHP = value; OnValueChanged(); }
+        set { MaxHP = value; OnValueChanged_HP(); }
     }
 
     private int healthPoint;
     public int HealthPoint
     {
         get { return healthPoint; }
-        set { healthPoint = value < MaxHP ? value : MaxHP; this.OnValueChanged(); }
+        set { healthPoint = value < MaxHP ? value : MaxHP; this.OnValueChanged_HP(); }
     }
 
     private bool shell;
@@ -36,9 +42,12 @@ public class HPManager : MonoBehaviour
         get { return shell; }
         set { shell = value; ShellImage.enabled = value; }
     }
+
+
+
     void Awake()
     {
-        GameManager.Instance.HPManager_readonly = this;
+        GameManager.Instance.InGameUIManager_readonly = this;
     }
 
     void OnEnable()
@@ -48,7 +57,23 @@ public class HPManager : MonoBehaviour
         HPInitialize();
     }
 
-    public void OnValueChanged()
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.A)) this.HealthPoint += 1;
+        if (Input.GetKey(KeyCode.B)) this.HealthPoint -= 1;
+    }
+
+    public void OnValueChanged_PearlCount()
+    {
+        PearlCount.text = GameManager.Instance.PearlCount.ToString();
+    }
+
+    public void OnValueChanged_MonsterCount() 
+    {
+        MonsterCount.text = GameManager.Instance.NowMonsterCount.ToString() + " / " + GameManager.Instance.MaxMonsterCount.ToString();
+    }
+
+    public void OnValueChanged_HP()
     {
         for (int i = 0; i < MaxHP; ++i)
         {
@@ -73,9 +98,4 @@ public class HPManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.A)) this.HealthPoint += 1;
-        if (Input.GetKey(KeyCode.B)) this.HealthPoint -= 1;
-    }
 }

@@ -47,7 +47,7 @@ public class PlayerStatus : MonoBehaviour
         set
         {
             this.hp = value;
-            GameManager.Instance.HPManager_readonly.HealthPoint = hp;
+            GameManager.Instance.InGameUIManager_readonly.HealthPoint = hp;
         }
     }
     public bool IsShield
@@ -59,7 +59,7 @@ public class PlayerStatus : MonoBehaviour
         set
         {
             this.isShield = value;
-            GameManager.Instance.HPManager_readonly.Shell = isShield;
+            GameManager.Instance.InGameUIManager_readonly.Shell = isShield;
         }
     }
 

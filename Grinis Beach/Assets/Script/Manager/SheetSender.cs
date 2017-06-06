@@ -11,8 +11,6 @@ public class SheetSender : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("??");
-        Debug.Log(GameManager.Instance);
         GameManager.Instance.CharacterSheet_readonly = charSheet;
         GameManager.Instance.gunSheet_readonly = gunSheet;
     }
