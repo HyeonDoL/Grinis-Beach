@@ -40,13 +40,13 @@ public abstract class AI : MonoBehaviour
 
     [SerializeField]
     protected float AttackCoolTime;
-    protected float AttackCoolTimer;
-    protected float isCanUsingAttack;
+    protected bool isCanUsingAttack;
 
     [SerializeField]
     protected float SpecialCoolTime;
-    protected float SpecialCoolTimer;
-    protected float isCanUsingSpecial;
+    protected bool isCanUsingSpecial;
+
+    protected bool isCanMove;
 
     [SerializeField]
     protected float HealthPoint;
