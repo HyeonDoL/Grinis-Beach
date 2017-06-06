@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class SelectPlayer : MonoBehaviour
 {
     [SerializeField]
+    private SeeMasks charMask;
+    [SerializeField]
     private Text UnitName;
     [SerializeField]
     private Text UnitStory;
@@ -73,17 +75,17 @@ public class SelectPlayer : MonoBehaviour
                 UnitName.text = name;
                 UnitStory.text = UnitSheet.m_data[i].introduction;
                 GameManager.Instance.selectedPlayableUnit = new GameManager.Pair(i, name);
-
-                SetUnitObjectAllFalse();
-                if (!Units.TryGetValue(i, out UnitModel))
-                {
-                    UnitModel = GameObject.Instantiate(UnitPrefabContainer[i]);
-                    Units.Add(i, UnitModel);
-                }
-                else
-                {
-                    Units[i].SetActive(true);
-                }
+                charMask.SeeMask(i);
+                //SetUnitObjectAllFalse();
+                //if (!Units.TryGetValue(i, out UnitModel))
+                //{
+                //    UnitModel = GameObject.Instantiate(UnitPrefabContainer[i]);
+                //    Units.Add(i, UnitModel);
+                //}
+                //else
+                //{
+                //    Units[i].SetActive(true);
+                //}
 
                 for (int j = 0; j < UnitSheet.m_data[i].displayonlyHp; ++j) HealthPoints[j].enabled = true;
                 for (int j = 0; j < UnitSheet.m_data[i].displayonlySpeed; ++j) speeds[j].enabled = true;
