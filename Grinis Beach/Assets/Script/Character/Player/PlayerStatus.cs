@@ -5,23 +5,63 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField]
     private PlayerDataContainer container;
 
-    private CharacterData data;
+    private GunSheet gunSheet;
+
+    private GunData gunData;
+
+    private CharacterData characterData;
+
+    private int hp;
+    private bool isShield;
 
     private void Awake()
     {
-        data = container.Data;
+        characterData = container.Data;
 
-        Hp = data.hp;
+        Hp = characterData.hp;
         IsShield = true;
 
-        MoveSpeed = data.move.moveSpeed;
+        MoveSpeed = characterData.move.moveSpeed;
 
         Bomb = 0;
         Pearl = 0;
+
+        gunSheet = GameManager.Instance.gunSheet_readonly;
+
+        for (int count = 0; count < gunSheet.m_data.Count; count++)
+        {
+            if(gunSheet.m_data[count].name == characterData.firstGunName)
+            {
+                gunData = gunSheet.m_data[count];
+                break;
+            }
+        }
     }
 
-    public int Hp { get; set; }
-    public bool IsShield { get; set; }
+    public int Hp
+    {
+        get
+        {
+            return this.hp;
+        }
+        set
+        {
+            this.hp = value;
+            GameManager.Instance.HPManager_readonly.HealthPoint = hp;
+        }
+    }
+    public bool IsShield
+    {
+        get
+        {
+            return this.isShield;
+        }
+        set
+        {
+            this.isShield = value;
+            GameManager.Instance.HPManager_readonly.Shell = isShield;
+        }
+    }
 
     public float MoveSpeed { get; set; }
 
@@ -29,4 +69,5 @@ public class PlayerStatus : MonoBehaviour
 
     public int Pearl { get; set; }
 
+    public int Magazine { get; set; }
 }

@@ -13,6 +13,8 @@ public class CharacterData
     [TextArea]
     public string introduction;
 
+    public string firstGunName;
+
     public int hp;
 
     public int bomb;

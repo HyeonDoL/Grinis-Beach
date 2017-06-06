@@ -10,6 +10,8 @@ public class GunData
 {
     public string name;
 
+    public int needPearl;
+
     public GameObject bullet;
 
     public GunType type;
