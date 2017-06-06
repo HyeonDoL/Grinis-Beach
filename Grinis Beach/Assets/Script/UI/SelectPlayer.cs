@@ -48,6 +48,12 @@ public class SelectPlayer : MonoBehaviour
     }
     void Start()
     {
+        for (int i = 0; i < UnitSheet.m_data.Count; ++i)
+        {
+            UnitModel = GameObject.Instantiate(UnitPrefabContainer[i]);
+            Units.Add(i, UnitModel);
+        }
+        SetUnitObjectAllFalse();
         this.SelectedUnitUpdate();
     }
     public void OnClickArrow(int add)
@@ -66,7 +72,7 @@ public class SelectPlayer : MonoBehaviour
                 string name = UnitSheet.m_data[i].name;
                 UnitName.text = name;
                 UnitStory.text = UnitSheet.m_data[i].introduction;
-                GameManager.Instance.selectedPlayableUnit = new GameManager.Pair(i,name);
+                GameManager.Instance.selectedPlayableUnit = new GameManager.Pair(i, name);
 
                 SetUnitObjectAllFalse();
                 if (!Units.TryGetValue(i, out UnitModel))
@@ -84,11 +90,11 @@ public class SelectPlayer : MonoBehaviour
                 for (int j = 0; j < UnitSheet.m_data[i].displayOnlyAttackPoint; ++j) attacks[j].enabled = true;
             }
         }
-        
+
     }
     private void SetUnitObjectAllFalse()
     {
-        for (int i=0;i<Units.Count;++i)
+        for (int i = 0; i < Units.Count; ++i)
         {
             Units[i].SetActive(false);
         }
