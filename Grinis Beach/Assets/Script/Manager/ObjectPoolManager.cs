@@ -54,8 +54,10 @@ public class ObjectPoolManager : MonoBehaviour
             infoList[count].pool.name = infoList[count].type.ToString();
 
             ObjectPool objectPool = new ObjectPool();
-            objectPool.Prefab.name = infoList[count].type.ToString();
+
             objectPool.Prefab = infoList[count].pool;
+            objectPool.Prefab.name = infoList[count].type.ToString();
+
             objectPoolList[infoList[count].type.ToString()] = objectPool;
 
             GameObject group = new GameObject();
