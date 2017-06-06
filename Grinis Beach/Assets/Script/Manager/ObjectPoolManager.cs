@@ -90,7 +90,7 @@ public class ObjectPoolManager : MonoBehaviour
     {
         if (!objectPoolList.ContainsKey(type.ToString()))
             return null;
-
+        
         ObjectPool pool = (ObjectPool)objectPoolList[type.ToString()];
 
         GameObject obj;
