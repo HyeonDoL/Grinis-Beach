@@ -8,13 +8,14 @@ public class DefaultFire : GunFire
     {
 
         Vector3 targetDirection = Direction;
-        Bullet bullet = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Water_Drop, this.transform.position).GetComponent<Bullet>();
+        Bullet bullet = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Water_Drop, StartPosition).GetComponent<Bullet>();
         bullet.Damage = DMG;
         bullet.Knockback = KnockBack;
         bullet.GetComponent<Rigidbody>().velocity =
-            targetDirection *
+            targetDirection.normalized *
             GameManager.Instance.
             gunSheet_readonly.m_data[1].
             bulletInfo.speed;
+        bullet.gameObject.layer = Shooter;
     }
 }

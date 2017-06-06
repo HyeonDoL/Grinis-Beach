@@ -88,7 +88,7 @@ public class ObjectPoolManager : MonoBehaviour
 
     public GameObject GetObject(ObjectPoolType type, Vector3 startPosition)
     {
-        if (objectPoolList.ContainsKey(type.ToString()))
+        if (!objectPoolList.ContainsKey(type.ToString()))
             return null;
 
         ObjectPool pool = (ObjectPool)objectPoolList[type.ToString()];

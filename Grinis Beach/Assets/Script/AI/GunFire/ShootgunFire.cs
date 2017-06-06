@@ -8,15 +8,18 @@ public class ShootgunFire : GunFire
     {
         for (int i = 0; i < 3; ++i)
         {
+            
             Vector3 targetDirection = Quaternion.Euler(0, (i * 15f - 15f), 0) * Direction;
-            Bullet bullet = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Water_Drop, this.transform.position).GetComponent<Bullet>();
+            Bullet bullet = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Water_Drop, StartPosition).GetComponent<Bullet>();
             bullet.Damage = DMG;
             bullet.Knockback = KnockBack;
-            bullet.GetComponent<Rigidbody>().velocity = 
-                targetDirection * 
+            bullet.GetComponent<Rigidbody>().velocity =
+                targetDirection.normalized * 
                 GameManager.Instance.
                 gunSheet_readonly.m_data[2].
                 bulletInfo.speed;
+            bullet.gameObject.layer = Shooter;
+            Debug.Log("Ta : " + targetDirection);
         }
         
     }
