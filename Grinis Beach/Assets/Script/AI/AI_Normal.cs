@@ -42,7 +42,7 @@ public class AI_Normal : AI
         Invoke("SetTimerToZero_Attack", AttackCoolTime);
 
         Vector3 Direction = PlayerTransform.position - myTransform.position;
-        
+        Debug.Log("GameManager.Instance.gunSheet_readonly.m_data[0].fire" + GameManager.Instance.gunSheet_readonly.m_data[0]);
         switch(myType)
         {
             case AIGunType.ShootGun: GameManager.Instance.gunSheet_readonly.m_data[2].fire.Fire(LayerMask.NameToLayer("Bullet_Monster"), Direction, this.transform.position, Mathf.RoundToInt(this.AttackPoint), 2); break;
