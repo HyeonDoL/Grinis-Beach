@@ -11,17 +11,17 @@ public enum AITriggerType
     Temp //Something need?
 }
 
-public enum AIType
+public enum AIGunType
 {
-    Kraken,//부채꼴   1
-    NormalMonster,//돌진 정지 공격 돌진
-    Lee//무빙연발 후 10연사    3
+    Default,//부채꼴   1
+    ShootGun,//돌진 정지 공격 돌진
+    Boom//무빙연발 후 10연사    3
 }
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class AI : MonoBehaviour
 {
     [SerializeField]
-    protected AIType myType;
+    protected AIGunType myType;
 
     [SerializeField]
     protected NavMeshAgent NavMeshAgent_script;

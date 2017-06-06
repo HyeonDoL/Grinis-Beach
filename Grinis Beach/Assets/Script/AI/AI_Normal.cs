@@ -12,13 +12,14 @@ public class AI_Normal : AI
 
     protected override void Awake()
     {
+        isCanMove = true;
         NavMeshAgent_script.speed = Speed;
         isCanUsingAttack = true;
     }
     void OnEnable()
     {
         (Detector as CapsuleCollider).radius = DetectDistance;
-        base.Spawn();
+        //base.Spawn();
     }
 
     protected override void Update()
@@ -41,15 +42,13 @@ public class AI_Normal : AI
         Invoke("SetTimerToZero_Attack", AttackCoolTime);
 
         Vector3 Direction = PlayerTransform.position - myTransform.position;
-        //todo : SHOOT!!!!
-        GameObject test =  GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        test.SetActive(false);
-        test.transform.position = this.transform.position;
-        test.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        test.AddComponent<Rigidbody>().useGravity = false;
-        test.GetComponent<Rigidbody>().velocity = Direction.normalized * 10f;
-        test.SetActive(true);
-        //
+        
+        switch(myType)
+        {
+            case AIGunType.ShootGun: GameManager.Instance.gunSheet_readonly.m_data[2].fire.Fire(LayerMask.NameToLayer("Bullet_Monster"), Direction, this.transform.position, Mathf.RoundToInt(this.AttackPoint), 2); break;
+            case AIGunType.Default: GameManager.Instance.gunSheet_readonly.m_data[0].fire.Fire(LayerMask.NameToLayer("Bullet_Monster"), Direction, this.transform.position, Mathf.RoundToInt(this.AttackPoint), 2); break;
+            case AIGunType.Boom: GameManager.Instance.gunSheet_readonly.m_data[3].fire.Fire(LayerMask.NameToLayer("Bullet_Monster"), Direction, this.transform.position, Mathf.RoundToInt(this.AttackPoint), 2); break;
+        }
 
     }
     protected override void Spawn()
