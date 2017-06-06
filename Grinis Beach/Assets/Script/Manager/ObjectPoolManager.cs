@@ -51,9 +51,12 @@ public class ObjectPoolManager : MonoBehaviour
     {
         for (int count = 0; count < infoList.Length; ++count)
         {
+            infoList[count].pool.name = infoList[count].type.ToString();
+
             ObjectPool objectPool = new ObjectPool();
+            objectPool.Prefab.name = infoList[count].type.ToString();
             objectPool.Prefab = infoList[count].pool;
-            objectPoolList[infoList[count].type] = objectPool;
+            objectPoolList[infoList[count].type.ToString()] = objectPool;
 
             GameObject group = new GameObject();
             group.name = infoList[count].pool.name;
@@ -69,6 +72,7 @@ public class ObjectPoolManager : MonoBehaviour
             {
                 GameObject clone = Instantiate(objectPool.Prefab);
                 clone.SetActive(false);
+                clone.name = infoList[count].type.ToString();
                 clone.transform.parent = group.transform;
 
                 objectPool.UnusedList.Add(clone);
@@ -82,10 +86,10 @@ public class ObjectPoolManager : MonoBehaviour
 
     public GameObject GetObject(ObjectPoolType type, Vector3 startPosition)
     {
-        if (objectPoolList.ContainsKey(type))
+        if (objectPoolList.ContainsKey(type.ToString()))
             return null;
 
-        ObjectPool pool = (ObjectPool)objectPoolList[type];
+        ObjectPool pool = (ObjectPool)objectPoolList[type.ToString()];
 
         GameObject obj;
 
