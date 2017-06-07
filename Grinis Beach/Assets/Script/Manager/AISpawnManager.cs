@@ -4,39 +4,40 @@ using UnityEngine;
 
 public class AISpawnManager : MonoBehaviour
 {
-    public enum SpawnRail
-    {
-        Left,
-        Right
-    }
-    [SerializeField]
-    private SpawnRail myRail;
 
     [SerializeField]
-    private GameObject[] AIList;
+    private AIContainer container;
 
     [SerializeField]
-    private int[] SpawnCount;
+    private TextAsset data;
+    [Header("0 = Left 1 = Right")]
+    [SerializeField]
+    private Transform[] Masks;
 
-    private int SpawnCountIndex;
-    private int AIIndex;
+    private Vector4[] spawnData;
+
+    private int lastSaveIndex;
     void Awake()
     {
-        AIIndex = 0;
-        SpawnCountIndex = 0;
+        lastSaveIndex = 0;
+        spawnData = GetVector4InFile.FileToVector4(data); //wave , line, index, count
         GameManager.Instance.OnInitWave += this.OnInitWave;
     }
 
     void OnInitWave()
     {
-     
-        int temp = SpawnCount[SpawnCountIndex];
-        if (temp > AIList.Length) { Debug.Log("Out of range"); return; }
-        for (int i = AIIndex; i <= temp; ++i)
+        for (int i = lastSaveIndex; i < spawnData.Length; ++i)
         {
-            AIList[i].SetActive(true);
+            if (spawnData[i].x < i) continue;
+            if (spawnData[i].x > GameManager.Instance.Wave) { lastSaveIndex = i; break; }
+            for (int createCount = 0; createCount < spawnData[i].w; ++createCount)
+            {
+                GameObject obj = GameObject.Instantiate(container[(int)spawnData[i].z]);
+
+                obj.transform.parent = Masks[spawnData[i].y > 0 ? 1 : 0];
+                obj.transform.position = Vector3.zero;
+            }
+
         }
-        AIIndex = temp;
-        ++SpawnCountIndex;
     }
 }

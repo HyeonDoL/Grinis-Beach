@@ -122,7 +122,11 @@ public class GameManager : MonoBehaviour
         Wave = 1;
         Round = 0;
     }
-
+    void Start()
+    {
+        if (OnInitWave != null)
+            OnInitWave();
+    }
     void Update()
     {
         //if (NowMonsterCount != 0)
