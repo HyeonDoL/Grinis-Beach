@@ -19,7 +19,6 @@ public class ShootgunFire : GunFire
                 gunSheet_readonly.m_data[2].
                 bulletInfo.speed;
             bullet.gameObject.layer = Shooter;
-            Debug.Log("Ta : " + targetDirection);
         }
         
     }
