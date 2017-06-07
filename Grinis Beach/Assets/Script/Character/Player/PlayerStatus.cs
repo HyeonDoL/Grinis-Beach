@@ -2,7 +2,6 @@
 
 public class PlayerStatus : MonoBehaviour
 {
-    [SerializeField]
     private PlayerDataContainer container;
 
     private GunSheet gunSheet;
@@ -16,6 +15,8 @@ public class PlayerStatus : MonoBehaviour
 
     private void Awake()
     {
+        container = InGameManager.Instance.PlayerDataContainer_readonly;
+
         characterData = container.Data;
 
         Hp = characterData.hp;

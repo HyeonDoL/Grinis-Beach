@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PlayerDash : MonoBehaviour
 {
-    [SerializeField]
     private PlayerDataContainer container;
 
     [SerializeField]
@@ -18,6 +17,8 @@ public class PlayerDash : MonoBehaviour
 
     private void Awake()
     {
+        container = InGameManager.Instance.PlayerDataContainer_readonly;
+
         playerTrans = container.PlayerTrans;
 
         IsDash = false;

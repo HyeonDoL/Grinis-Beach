@@ -2,20 +2,23 @@
 
 public class Item : MonoBehaviour
 {
-    [SerializeField]
-    private ItemSheet sheet;
+    private ItemSheet defaultSheet;
 
     private ItemData data;
 
     public int NeedPearl { get; private set; }
 
-    public virtual string Name()
+    public virtual string Name() { return ""; }
+
+    protected virtual ItemSheet Sheet()
     {
-        return "";
+        return defaultSheet;
     }
 
     private void Awake()
     {
+        ItemSheet sheet = Sheet();
+
         for(int count = 0; count < sheet.m_data.Count; count++)
         {
             if (sheet.m_data[count].name == Name())

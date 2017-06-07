@@ -45,6 +45,20 @@ public class GameManager : MonoBehaviour
         set { if (!gunSheet) gunSheet = value; }
     }
 
+    private ItemSheet activeItemSheet = null;
+    public ItemSheet activeItemSheet_readonly
+    {
+        get { return activeItemSheet; }
+        set { if (!activeItemSheet) activeItemSheet = value; }
+    }
+
+    private ItemSheet passiveItemSheet = null;
+    public ItemSheet passiveItemSheet_readonly
+    {
+        get { return passiveItemSheet; }
+        set { if (!passiveItemSheet) passiveItemSheet = value; }
+    }
+
     private InGameUIManager InGameUIManager = null;
     public InGameUIManager InGameUIManager_readonly
     {
