@@ -6,8 +6,16 @@ public class AI_Normal : AI
 {
     [SerializeField]
     private float DetectDistance;
+
     [SerializeField]
     private Collider Detector;
+
+    [SerializeField]
+    private Animator myAnimator;
+
+    [SerializeField]
+    private float HandID;
+
     private bool isStopMove;
 
     protected override void Awake()
@@ -26,7 +34,7 @@ public class AI_Normal : AI
     {
         Move();
     }
-    
+
     protected override void Attack()
     {
         if (!isCanUsingAttack)
@@ -37,13 +45,14 @@ public class AI_Normal : AI
         isCanUsingAttack = false;
         isStopMove = true;
         NavMeshAgent_script.velocity = Vector3.zero;
-
+        myAnimator.SetBool("Shot", true);
+        myAnimator.SetFloat("HandID", HandID);
         Invoke("SetTimerToZero_Stopmove", 0.8f);
         Invoke("SetTimerToZero_Attack", AttackCoolTime);
 
         Vector3 Direction = PlayerTransform.position - myTransform.position;
         Debug.Log("GameManager.Instance.gunSheet_readonly.m_data[0].fire" + GameManager.Instance.gunSheet_readonly.m_data[0]);
-        switch(myType)
+        switch (myType)
         {
             case AIGunType.ShootGun: GameManager.Instance.gunSheet_readonly.m_data[2].fire.Fire(LayerMask.NameToLayer("Bullet_Monster"), Direction, this.transform.position, Mathf.RoundToInt(this.AttackPoint), 2); break;
             case AIGunType.Default: GameManager.Instance.gunSheet_readonly.m_data[0].fire.Fire(LayerMask.NameToLayer("Bullet_Monster"), Direction, this.transform.position, Mathf.RoundToInt(this.AttackPoint), 2); break;
@@ -60,6 +69,7 @@ public class AI_Normal : AI
     {
         if (!isCanMove || isStopMove)
             return;
+        myAnimator.SetFloat("Speed", NavMeshAgent_script.velocity.normalized.magnitude);
         NavMeshAgent_script.destination = PlayerTransform.position;
     }
 
@@ -70,13 +80,14 @@ public class AI_Normal : AI
     private void SetTimerToZero_Stopmove()
     {
         isStopMove = false;
+        myAnimator.SetBool("Shot", false);
     }
 
 
 
     public override void OnChildTriggerEnter(AITriggerType type, Collider other)
     {
-        switch(type)
+        switch (type)
         {
             case AITriggerType.DetectBox:
                 isCanMove = false;

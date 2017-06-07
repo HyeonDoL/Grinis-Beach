@@ -19,7 +19,7 @@ public class AI_Kraken : AI
     {
         isCanMove = true;
         normalAttackCount = 0;
-        Paze(1);
+        Paze(3);
         NavMeshAgent_script.speed = Speed;
         isCanUsingAttack = true;
         myMask = LayerMask.NameToLayer("Bullet_Monster");
@@ -69,6 +69,7 @@ public class AI_Kraken : AI
             case 4: StartCoroutine(Attack4()); break;
         }
     }
+    #region Attack
     private void Attack_normal()
     {
         if (normalAttackCount == 7)
@@ -193,6 +194,7 @@ public class AI_Kraken : AI
         }
 
     }
+    #endregion 
 
     private void Paze(int index)
     {
