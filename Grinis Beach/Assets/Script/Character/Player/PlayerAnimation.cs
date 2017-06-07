@@ -2,10 +2,26 @@
 
 public class PlayerAnimation : MonoBehaviour
 {
+    public enum CharacterHandType
+    {
+        Single = 0,
+        Double = 1
+    }
+
     [SerializeField]
     private Animator playerAni;
 
+    [SerializeField]
+    private CharacterHandType type;
+
+    private void Awake()
+    {
+        HandType = type;
+    }
+
     private PlayerState prevState = PlayerState.Idle;
+
+    public CharacterHandType HandType { set { playerAni.SetFloat("HandID", (float)value); } }
 
     public void ChangeAni(PlayerState state)
     {

@@ -2,7 +2,6 @@
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField]
     private PlayerDataContainer container;
 
     private Rigidbody playerRigid;
@@ -11,6 +10,8 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
     {
+        container = InGameManager.Instance.PlayerDataContainer_readonly;
+
         playerRigid = container.PlayerRigid;
 
         CharacterData data = container.Data;
