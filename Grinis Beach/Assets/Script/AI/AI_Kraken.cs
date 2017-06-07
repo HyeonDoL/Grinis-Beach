@@ -19,7 +19,7 @@ public class AI_Kraken : AI
     {
         isCanMove = true;
         normalAttackCount = 0;
-        Paze(3);
+        Paze(1);
         NavMeshAgent_script.speed = Speed;
         isCanUsingAttack = true;
         myMask = LayerMask.NameToLayer("Bullet_Monster");
@@ -50,7 +50,7 @@ public class AI_Kraken : AI
         }
         isCanUsingAttack = false;
         NavMeshAgent_script.velocity = Vector3.zero;
-        if (paze == 3)
+        if (paze == 1)
             Attack_normal();
         else
             SelectPattern();
