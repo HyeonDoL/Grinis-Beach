@@ -74,6 +74,8 @@ public class AI_Richard : AI
 
             myAnimator.SetBool("Shot", true);
             Fire(2, myMask, PlayerTransform.position - myTransform.position, myTransform.position, 2);
+            yield return new WaitForSeconds(0.1f);
+            Fire(2, myMask, PlayerTransform.position - myTransform.position, myTransform.position, 2);
             Invoke("SetTimerToZero_Stopmove", 0.8f);
             yield return new WaitForSeconds(1);
         }
@@ -89,6 +91,8 @@ public class AI_Richard : AI
             }
 
             myAnimator.SetBool("Shot", true);
+            Fire(2, myMask, PlayerTransform.position - myTransform.position, myTransform.position, 2); 
+            yield return new WaitForSeconds(0.1f);
             Fire(2, myMask, PlayerTransform.position - myTransform.position, myTransform.position, 2);
             Invoke("SetTimerToZero_Stopmove", 0.8f);
             yield return new WaitForSeconds(1);
@@ -105,6 +109,8 @@ public class AI_Richard : AI
             }
 
             myAnimator.SetBool("Shot", true);
+            Fire(2, myMask, PlayerTransform.position - myTransform.position, myTransform.position, 2);
+            yield return new WaitForSeconds(0.1f);
             Fire(2, myMask, PlayerTransform.position - myTransform.position, myTransform.position, 2);
             Invoke("SetTimerToZero_Stopmove", 0.8f);
             yield return new WaitForSeconds(0.5f);
@@ -125,7 +131,7 @@ public class AI_Richard : AI
             myAnimator.SetBool("Shot", true);
             Fire(2, myMask, PlayerTransform.position - myTransform.position, myTransform.position, 2);
             Invoke("SetTimerToZero_Stopmove", 0.8f);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.05f);
         }
 
     }
