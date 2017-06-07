@@ -24,7 +24,7 @@ public class PlayerControl : MonoBehaviour
     private PlayerShot playerShot;
 
     [SerializeField]
-    private ActiveItem activeItem;
+    private ObjectPoolType activeItemType;
 
     private float horizontal, vertical;
 
@@ -48,7 +48,8 @@ public class PlayerControl : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
-
+            ActiveItem activeItem = ObjectPoolManager.Instance.GetObject(activeItemType, transform.position).GetComponent<ActiveItem>();
+            activeItem.Ability();
         }
     }
 
