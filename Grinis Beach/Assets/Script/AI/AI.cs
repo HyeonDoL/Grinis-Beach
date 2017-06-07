@@ -67,6 +67,7 @@ public abstract class AI : MonoBehaviour
     protected virtual void Awake() { }
     protected virtual void OnEnable()
     {
+        this.PlayerTransform = InGameManager.Instance.PlayerDataContainer_readonly.PlayerTrans;
         Spawn();
     }
     protected virtual void Update()

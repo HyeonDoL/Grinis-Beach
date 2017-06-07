@@ -23,7 +23,7 @@ public class AI_Um : AI
     private int paze;
     protected override void Awake()
     {
-        paze = 3;
+        paze = 1;
         isCanMove = true;
         myMask = LayerMask.NameToLayer("Bullet_Monster");
         NavMeshAgent_script.speed = Speed;
