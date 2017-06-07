@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI_Richard : AI
+public class AI_Um : AI
 {
+
 
     [SerializeField]
     private float DetectDistance;
@@ -22,7 +23,7 @@ public class AI_Richard : AI
     private int paze;
     protected override void Awake()
     {
-        paze = 1;
+        paze = 3;
         isCanMove = true;
         myMask = LayerMask.NameToLayer("Bullet_Monster");
         NavMeshAgent_script.speed = Speed;
@@ -61,35 +62,39 @@ public class AI_Richard : AI
     }
     private IEnumerator Attack1()
     {
-            if (paze != 1)
-            {
-                Invoke("SetTimerToZero_Attack", AttackCoolTime);
-                yield break;
-            }
+        if (paze != 1)
+        {
+            Invoke("SetTimerToZero_Attack", AttackCoolTime);
+            yield break;
+        }
 
-            myAnimator.SetBool("Shot", true);
-            Fire(1, myMask, PlayerTransform.position - myTransform.position, myTransform.position, 2);
-            yield return new WaitForSeconds(0.1f);
-            Fire(1, myMask, PlayerTransform.position - myTransform.position, myTransform.position, 2);
-            Invoke("SetTimerToZero_Stopmove", 0.8f);
-            yield return new WaitForSeconds(1);
-            isCanUsingAttack = true;
+        myAnimator.SetBool("Shot", true);
+        for (int i = 0; i < 3; i++)
+        {
+            Vector3 targetDirection = Quaternion.Euler(0, (i * 15f - 15f), 0) * (PlayerTransform.position - myTransform.position);
+            Fire(1, myMask, targetDirection, myTransform.position, 2);
+        }
+        Invoke("SetTimerToZero_Stopmove", 0.8f);
+        yield return new WaitForSeconds(1);
+        isCanUsingAttack = true;
     }
     private IEnumerator Attack2()
     {
-            if (paze != 2)
-            {
-                Invoke("SetTimerToZero_Attack", AttackCoolTime);
-                yield break;
-            }
+        if (paze != 2)
+        {
+            Invoke("SetTimerToZero_Attack", AttackCoolTime);
+            yield break;
+        }
 
-            myAnimator.SetBool("Shot", true);
-            Fire(1, myMask, PlayerTransform.position - myTransform.position, myTransform.position, 2); 
-            yield return new WaitForSeconds(0.1f);
-            Fire(1, myMask, PlayerTransform.position - myTransform.position, myTransform.position, 2);
-            Invoke("SetTimerToZero_Stopmove", 0.8f);
-            yield return new WaitForSeconds(1);
-            isCanUsingAttack = true;
+        myAnimator.SetBool("Shot", true);
+        for (int i = 0; i < 6; i++)
+        {
+            Vector3 targetDirection = Quaternion.Euler(0, (i * 10f - 30f), 0) * (PlayerTransform.position - myTransform.position);
+            Fire(1, myMask, targetDirection, myTransform.position, 2);
+        }
+        Invoke("SetTimerToZero_Stopmove", 0.8f);
+        yield return new WaitForSeconds(1);
+        isCanUsingAttack = true;
     }
     private IEnumerator Attack3()
     {
@@ -100,9 +105,11 @@ public class AI_Richard : AI
         }
 
         myAnimator.SetBool("Shot", true);
-        Fire(1, myMask, PlayerTransform.position - myTransform.position, myTransform.position, 2);
-        yield return new WaitForSeconds(0.1f);
-        Fire(1, myMask, PlayerTransform.position - myTransform.position, myTransform.position, 2);
+        for (int i = 0; i < 6; i++)
+        {
+            Vector3 targetDirection = Quaternion.Euler(0, (i * 10f - 30f), 0) * (PlayerTransform.position - myTransform.position);
+            Fire(1, myMask, targetDirection, myTransform.position, 2);
+        }
         Invoke("SetTimerToZero_Stopmove", 0.8f);
         yield return new WaitForSeconds(0.5f);
         isCanUsingAttack = true;
@@ -111,27 +118,22 @@ public class AI_Richard : AI
     {
         if (!isCanUsingSpecial)
             yield break;
-        if (paze == 1)
+        if (paze != 3)
             yield break;
-
         isCanUsingSpecial = false;
-        int count = paze == 2 ? 5 : 10;
-        while (true)
-        {
-            if (count <= 0)
-            {
-                Invoke("SetTimerToZero_Stopmove", 0.8f);
-                Invoke("SpecialCool", SpecialCoolTime);
-                yield break;
-            }
+        isStopMove = true;
+        NavMeshAgent_script.velocity = Vector3.zero;
+        myAnimator.SetBool("Shot", true);
 
-            isStopMove = true;
-            NavMeshAgent_script.velocity = Vector3.zero;
-            count -= 1;
-            myAnimator.SetBool("Shot", true);
-            Fire(1, myMask, PlayerTransform.position - myTransform.position, myTransform.position, 2);
-            yield return new WaitForSeconds(0.05f);
+        for (int i = 0; i < 12; i++)
+        {
+            Vector3 targetDirection = Quaternion.Euler(0, (i * 10f - 60f), 0) * (PlayerTransform.position - myTransform.position);
+            Fire(1, myMask, targetDirection, myTransform.position, 2);
         }
+
+        Invoke("SetTimerToZero_Stopmove", 0.8f);
+        Invoke("SpecialCool", SpecialCoolTime);
+        yield break;
 
     }
     private void SpecialCool()
@@ -143,7 +145,7 @@ public class AI_Richard : AI
         base.Damaged(DMG);
         if (HP <= 50)
             paze = 3;
-        else if (HP <= 100)
+        else if (HP <= 125)
             paze = 2;
     }
 
@@ -223,5 +225,5 @@ public class AI_Richard : AI
         }
 
     }
-
+    //Vector3 targetDirection = Quaternion.Euler(0, (i * 15f - 15f), 0) * Direction;
 }

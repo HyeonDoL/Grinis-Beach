@@ -40,14 +40,5 @@ public class IndividualParticipant : AI
         base.OnChildTriggerStay(type, other);
     }
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        base.OnTriggerEnter(other);
-    }
-
-    protected override void OnTriggerStay(Collider other)
-    {
-        base.OnTriggerStay(other);
-    }
 
 }

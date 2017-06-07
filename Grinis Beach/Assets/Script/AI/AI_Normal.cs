@@ -23,9 +23,6 @@ public class AI_Normal : AI
         isCanMove = true;
         NavMeshAgent_script.speed = Speed;
         isCanUsingAttack = true;
-    }
-    void OnEnable()
-    {
         (Detector as CapsuleCollider).radius = DetectDistance;
         //base.Spawn();
     }
@@ -139,16 +136,6 @@ public class AI_Normal : AI
             default:
                 break;
         }
-
-    }
-
-    protected override void OnTriggerEnter(Collider other)
-    {
-
-    }
-
-    protected override void OnTriggerStay(Collider other)
-    {
 
     }
 }

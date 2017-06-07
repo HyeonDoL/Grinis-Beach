@@ -4,39 +4,39 @@ using UnityEngine;
 
 public class AISpawnManager : MonoBehaviour
 {
+    public enum SpawnRail
+    {
+        Left,
+        Right
+    }
     [SerializeField]
-    private Transform[] Masks;
+    private SpawnRail myRail;
 
     [SerializeField]
     private GameObject[] AIList;
 
-    [Header("X : L(-1) or R(1),  Y : AI index Z : count")]
     [SerializeField]
-    private Vector3[] SpawnSheet;
+    private int[] SpawnCount;
 
-    private float Timer_sec;
-    private float Timer_min;
-    private int WaveIndex;
+    private int SpawnCountIndex;
+    private int AIIndex;
     void Awake()
     {
-        Timer_sec = Timer_min = 0;
+        AIIndex = 0;
+        SpawnCountIndex = 0;
+        GameManager.Instance.OnInitWave += this.OnInitWave;
     }
-    void Update()
-    {
-        Timer_sec += Time.deltaTime;
-        if(Timer_sec>60)
-        {
-            Timer_sec -= 60;
-            Timer_min += 1;
-        }
-        if(Timer_min>1)
-        {
-            WaveIndex += 1;
-            Spawn();
-        }
-    }
-    private void Spawn()
-    {
 
+    void OnInitWave()
+    {
+     
+        int temp = SpawnCount[SpawnCountIndex];
+        if (temp > AIList.Length) { Debug.Log("Out of range"); return; }
+        for (int i = AIIndex; i <= temp; ++i)
+        {
+            AIList[i].SetActive(true);
+        }
+        AIIndex = temp;
+        ++SpawnCountIndex;
     }
 }

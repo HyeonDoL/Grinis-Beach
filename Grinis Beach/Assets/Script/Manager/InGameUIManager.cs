@@ -47,6 +47,7 @@ public class InGameUIManager : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log(GameManager.Instance);
         GameManager.Instance.InGameUIManager_readonly = this;
     }
 
@@ -57,11 +58,6 @@ public class InGameUIManager : MonoBehaviour
         HPInitialize();
     }
 
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.A)) this.HealthPoint += 1;
-        if (Input.GetKey(KeyCode.B)) this.HealthPoint -= 1;
-    }
 
     public void OnValueChanged_PearlCount()
     {

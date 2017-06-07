@@ -65,7 +65,10 @@ public abstract class AI : MonoBehaviour
     }
 
     protected virtual void Awake() { }
-
+    protected virtual void OnEnable()
+    {
+        Spawn();
+    }
     protected virtual void Update()
     {
         Move();
@@ -74,7 +77,6 @@ public abstract class AI : MonoBehaviour
     protected virtual void Spawn()
     {
         ++GameManager.Instance.NowMonsterCount;
-        this.transform.position = SpawnPositionMasks[Random.Range(0, SpawnPositionMasks.Length)].position;
     }
 
     protected virtual void Idle() { }
@@ -99,10 +101,6 @@ public abstract class AI : MonoBehaviour
         GameManager.Instance.gunSheet_readonly.m_data[dataIndex].fire.Fire(targetMask, Direction, startPosition, Mathf.RoundToInt(this.AttackPoint), knockback); 
     }
     protected virtual void DropItem() { }
-
-    protected virtual void OnTriggerEnter(Collider other) { }
-
-    protected virtual void OnTriggerStay(Collider other) { }
 
     public virtual void OnChildTriggerEnter(AITriggerType type, Collider other) { }
 

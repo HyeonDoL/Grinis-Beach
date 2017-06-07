@@ -23,11 +23,7 @@ public class AI_Kraken : AI
         NavMeshAgent_script.speed = Speed;
         isCanUsingAttack = true;
         myMask = LayerMask.NameToLayer("Bullet_Monster");
-    }
-    void OnEnable()
-    {
         (Detector as CapsuleCollider).radius = DetectDistance;
-        //base.Spawn();
     }
 
     private void SeePlayer()
@@ -296,13 +292,4 @@ public class AI_Kraken : AI
 
     }
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-
-    }
-
-    protected override void OnTriggerStay(Collider other)
-    {
-
-    }
 }

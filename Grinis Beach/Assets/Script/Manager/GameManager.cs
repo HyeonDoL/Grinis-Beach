@@ -106,16 +106,50 @@ public class GameManager : MonoBehaviour
         set { pearlCount = value; InGameUIManager_readonly.OnValueChanged_PearlCount(); } 
     }
 
+    private float timer;
+    public int Wave;
+
+    public int Round;
+
     #endregion
+
+    public delegate void InitWave();
+    public event InitWave OnInitWave;
 
     void Awake()
     {
         DontDestroyOnLoad(this);
+        Wave = 1;
+        Round = 0;
     }
+
+    void Update()
+    {
+        //if (NowMonsterCount != 0)
+        //    return;
+        timer += Time.deltaTime;
+        if(timer>10)
+        {
+            //init wave
+            timer -= 10;
+            Wave += 1;
+            _NowMonsterCount = 0;
+            MaxMonsterCount = 0;
+            if (OnInitWave != null)
+                OnInitWave();
+
+        }
+        if(Wave==12)
+        {
+            Round += 1;
+            Wave = 0;
+        }
+    }
+    
 
     public void END()
     {
-        AutoFade.LoadLevel("menu", 2, 2, Color.gray);
+        AutoFade.LoadLevel("Title", 2, 2, Color.gray);
     }
 
 }
