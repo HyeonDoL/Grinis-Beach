@@ -79,10 +79,7 @@ public abstract class AI : MonoBehaviour
 
     protected virtual void Idle() { }
 
-    protected virtual void Move()
-    {
-        NavMeshAgent_script.destination = PlayerTransform.position;
-    }
+    protected virtual void Move() { }
 
     protected virtual void Attack() { }
 
