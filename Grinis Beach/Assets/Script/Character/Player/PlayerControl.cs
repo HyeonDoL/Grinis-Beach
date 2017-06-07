@@ -23,6 +23,9 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     private PlayerShot playerShot;
 
+    [SerializeField]
+    private ActiveItem activeItem;
+
     private float horizontal, vertical;
 
     private PlayerState state;
@@ -42,6 +45,11 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1) || playerDash.IsDash)
             state = PlayerState.Dash;
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+
+        }
     }
 
     private void FixedUpdate()

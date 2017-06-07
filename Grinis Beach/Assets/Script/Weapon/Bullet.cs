@@ -8,4 +8,9 @@ public class Bullet : MonoBehaviour
     public int Knockback { get; set; }
 
     public LayerMask TargetLayer { get; set; }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        ObjectPoolManager.Instance.Free(this.gameObject);
+    }
 }

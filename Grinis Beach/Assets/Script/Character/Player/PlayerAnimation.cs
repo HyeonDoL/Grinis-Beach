@@ -5,7 +5,7 @@ public class PlayerAnimation : MonoBehaviour
     public enum CharacterHandType
     {
         Single = 0,
-        Double = 1
+        TwoHands = 1
     }
 
     [SerializeField]
