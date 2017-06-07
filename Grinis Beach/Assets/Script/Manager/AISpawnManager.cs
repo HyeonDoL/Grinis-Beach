@@ -28,15 +28,17 @@ public class AISpawnManager : MonoBehaviour
     {
         for (int i = lastSaveIndex; i < spawnData.Length; ++i)
         {
-            if (spawnData[i].x < i) continue;
+            if (spawnData[i].x > i) continue;
             if (spawnData[i].x > GameManager.Instance.Wave) { lastSaveIndex = i; break; }
-            Debug.Log("i : " + i);
+            Debug.Log("i : " + i + "   wave : " + GameManager.Instance.Wave + "   .x : " + spawnData[i].x);
             Debug.Log(spawnData[i]);
             for (int createCount = 0; createCount < spawnData[i].w; ++createCount)
             {
                 GameObject obj = GameObject.Instantiate(container[(int)spawnData[i].z]);
+                obj.SetActive(false);
                 obj.transform.position = Masks[spawnData[i].y > 0 ? 1 : 0].position;
-                //obj.transform.parent = Masks[spawnData[i].y > 0 ? 1 : 0];
+                obj.transform.parent = Masks[spawnData[i].y > 0 ? 1 : 0];
+                obj.SetActive(true);
             }
 
         }
