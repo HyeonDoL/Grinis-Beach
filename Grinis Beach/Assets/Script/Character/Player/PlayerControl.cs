@@ -48,7 +48,8 @@ public class PlayerControl : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
-
+            GameObject obj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Water_Bomb, this.transform.position);
+            
         }
     }
 
