@@ -83,13 +83,18 @@ public abstract class AI : MonoBehaviour
 
     protected virtual void Attack() { }
 
+    protected virtual void Damaged() { }
+
     protected virtual void Dead()
     {
         DropItem();
         --GameManager.Instance.NowMonsterCount;
         this.gameObject.SetActive(false);
     }
-
+    protected virtual void Fire(int dataIndex, LayerMask targetMask,Vector3 Direction,Vector3 startPosition,int knockback)
+    {
+        GameManager.Instance.gunSheet_readonly.m_data[dataIndex].fire.Fire(targetMask, Direction, startPosition, Mathf.RoundToInt(this.AttackPoint), knockback); 
+    }
     protected virtual void DropItem() { }
 
     protected virtual void OnTriggerEnter(Collider other) { }
