@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-
+    public enum AudioClipIndex : int
+    {
+        Still_Alive = 0,
+        Take_On_Me = 1,
+        Above_the_Treetops = 2,
+        Beach_way = 3,
+        Mortal_Combat = 4
+    }
 
     private static AudioManager instance = null;
     public static AudioManager Instance
@@ -39,6 +46,11 @@ public class AudioManager : MonoBehaviour
     }
 
     #endregion
+
+    public void DoMyBestPlay(AudioClipIndex index)
+    {
+        this.DoMyBestPlay((int)index);
+    }
 
     public void DoMyBestPlay(int index)
     {
