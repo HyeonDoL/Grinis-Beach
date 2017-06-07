@@ -91,7 +91,7 @@ public class PlayerControl : MonoBehaviour
 
     private void Shot()
     {
-        if (state != PlayerState.Shot)
+        if (state != PlayerState.Shot || !playerShot.IsCanShot)
             return;
 
         playerShot.Shot();

@@ -9,6 +9,9 @@ public class PlayerDataContainer : MonoBehaviour
     private Rigidbody playerRigid;
 
     [SerializeField]
+    private PlayerAnimation playerAni;
+
+    [SerializeField]
     private string name;
 
     [SerializeField]
@@ -33,6 +36,8 @@ public class PlayerDataContainer : MonoBehaviour
     public Transform PlayerTrans { get { return this.player.transform; } }
 
     public Rigidbody PlayerRigid { get { return this.playerRigid; } } 
+
+    public PlayerAnimation PlayerAni { get { return this.playerAni; } }
 
     public string Name { get { return this.name; } set { this.name = value; } }
 
