@@ -14,6 +14,7 @@ public class AI_Kraken : AI
     private int normalAttackCount;
     private int AttackPatternRange;
     private bool isUseNeck;
+    private LayerMask myMask;
     protected override void Awake()
     {
         isCanMove = true;
@@ -21,6 +22,7 @@ public class AI_Kraken : AI
         Paze(1);
         NavMeshAgent_script.speed = Speed;
         isCanUsingAttack = true;
+        myMask = LayerMask.NameToLayer("Bullet_Monster");
     }
     void OnEnable()
     {
@@ -48,7 +50,7 @@ public class AI_Kraken : AI
         }
         isCanUsingAttack = false;
         NavMeshAgent_script.velocity = Vector3.zero;
-        if (paze == 1)
+        if (paze == 3)
             Attack_normal();
         else
             SelectPattern();
@@ -81,7 +83,7 @@ public class AI_Kraken : AI
         }
         Vector3 Direction = PlayerTransform.position - myTransform.position;
 
-        Fire(0, LayerMask.NameToLayer("Bullet_Monster"), Direction, mouth.position, 2);
+        Fire(0, myMask, Direction, mouth.position, 2);
         Invoke("SetTimerToZero_Attack", AttackCoolTime);
 
     }
@@ -93,7 +95,7 @@ public class AI_Kraken : AI
             myTransform.rotation = Quaternion.Euler(myTransform.rotation.eulerAngles.x, temp.y + 270 + i * 10, 0);
 
             Vector3 Direction = mouth.position - myTransform.position;
-            Fire(0, LayerMask.NameToLayer("Bullet_Monster"), Direction, mouth.position, 2);
+            Fire(0, myMask, Direction, mouth.position, 2);
         }
         myTransform.rotation = Quaternion.Euler(temp);
         isUseNeck = false;
@@ -108,7 +110,7 @@ public class AI_Kraken : AI
         {
             myTransform.rotation = Quaternion.Euler(temp.x, Random.Range(270, 450), temp.z);
             Vector3 Direction = mouth.position - myTransform.position;
-            Fire(0, LayerMask.NameToLayer("Bullet_Monster"), Direction, mouth.position, 2);
+            Fire(0, myMask, Direction, mouth.position, 2);
             ++count;
             if (count == 15)
             {
@@ -119,6 +121,7 @@ public class AI_Kraken : AI
             }
             yield return new WaitForSeconds(0.1f);
         }
+        
     }
     private IEnumerator Attack3()
     {
@@ -129,7 +132,7 @@ public class AI_Kraken : AI
             myTransform.rotation = Quaternion.Euler(myTransform.rotation.eulerAngles.x, temp.y + 270 + i * 20, 0);
 
             Vector3 Direction = mouth.position - myTransform.position;
-            Fire(0, LayerMask.NameToLayer("Bullet_Monster"), Direction, mouth.position, 2);
+            Fire(0, myMask, Direction, mouth.position, 2);
         }
         myTransform.rotation = Quaternion.Euler(temp);
 
@@ -140,7 +143,7 @@ public class AI_Kraken : AI
             myTransform.rotation = Quaternion.Euler(myTransform.rotation.eulerAngles.x, temp.y + 280 + i * 20, 0);
 
             Vector3 Direction = mouth.position - myTransform.position;
-            Fire(0, LayerMask.NameToLayer("Bullet_Monster"), Direction, mouth.position, 2);
+            Fire(0, myMask, Direction, mouth.position, 2);
         }
         myTransform.rotation = Quaternion.Euler(temp);
         isUseNeck = false;
@@ -162,7 +165,7 @@ public class AI_Kraken : AI
             temp += new Vector3(0, 180 / 2 * step, 0);
             myTransform.rotation = Quaternion.Euler(myTransform.rotation.eulerAngles.x, temp.y, 0);
             Vector3 Direction = mouth.position - myTransform.position;
-            Fire(0, LayerMask.NameToLayer("Bullet_Monster"), Direction, mouth.position, 2);
+            Fire(0, myMask, Direction, mouth.position, 2);
 
 
             count += step;
@@ -182,7 +185,7 @@ public class AI_Kraken : AI
             temp -= new Vector3(0, 180 / 2 * step, 0);
             myTransform.rotation = Quaternion.Euler(myTransform.rotation.eulerAngles.x, temp.y, 0);
             Vector3 Direction = mouth.position - myTransform.position;
-            Fire(0, LayerMask.NameToLayer("Bullet_Monster"), Direction, mouth.position, 2);
+            Fire(0, myMask, Direction, mouth.position, 2);
 
             count += step;
             yield return new WaitForSeconds(step);
