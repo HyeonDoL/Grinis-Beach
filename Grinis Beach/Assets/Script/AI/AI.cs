@@ -83,7 +83,10 @@ public abstract class AI : MonoBehaviour
 
     protected virtual void Attack() { }
 
-    protected virtual void Damaged() { }
+    protected virtual void Damaged(int DMG)
+    {
+        this.HP -= DMG;
+    }
 
     protected virtual void Dead()
     {

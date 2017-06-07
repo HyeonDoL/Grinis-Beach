@@ -228,8 +228,9 @@ public class AI_Kraken : AI
             return;
         NavMeshAgent_script.destination = PlayerTransform.position;
     }
-    protected override void Damaged()
+    protected override void Damaged(int DMG)
     {
+        base.Damaged(DMG);
         if (HP <= 100)
             Paze(3);
         else if (HP <= 200)
@@ -250,8 +251,8 @@ public class AI_Kraken : AI
                 isCanMove = false;
                 Attack();
                 break;
-            case AITriggerType.Bullet:
-                Damaged();
+            case AITriggerType.Bullet: 
+                Damaged(other.GetComponent<Bullet>().Damage);
                 break;
             case AITriggerType.Temp:
                 break;
@@ -267,7 +268,8 @@ public class AI_Kraken : AI
             case AITriggerType.DetectBox:
                 Attack();
                 break;
-            case AITriggerType.Bullet:
+            case AITriggerType.Bullet: 
+                Damaged(other.GetComponent<Bullet>().Damage);
                 break;
             case AITriggerType.Temp:
                 break;

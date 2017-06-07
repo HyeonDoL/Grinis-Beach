@@ -129,8 +129,9 @@ public class AI_Richard : AI
         }
 
     }
-    protected override void Damaged()
+    protected override void Damaged(int DMG)
     {
+        base.Damaged(DMG);
         if (HP <= 50)
             paze = 3;
         else if (HP <= 100)
@@ -170,6 +171,7 @@ public class AI_Richard : AI
                 StartCoroutine(SpecialAttack());
                 break;
             case AITriggerType.Bullet:
+                Damaged(other.GetComponent<Bullet>().Damage);
                 break;
             case AITriggerType.Temp:
                 break;
@@ -186,6 +188,7 @@ public class AI_Richard : AI
                 Attack();
                 break;
             case AITriggerType.Bullet:
+                Damaged(other.GetComponent<Bullet>().Damage);
                 break;
             case AITriggerType.Temp:
                 break;

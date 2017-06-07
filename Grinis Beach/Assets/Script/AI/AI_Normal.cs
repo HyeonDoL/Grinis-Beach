@@ -84,6 +84,10 @@ public class AI_Normal : AI
     }
 
 
+    protected override void Damaged(int DMG)
+    {
+        base.Damaged(DMG);
+    }
 
     public override void OnChildTriggerEnter(AITriggerType type, Collider other)
     {
@@ -94,6 +98,7 @@ public class AI_Normal : AI
                 Attack();
                 break;
             case AITriggerType.Bullet:
+                Damaged(other.GetComponent<Bullet>().Damage);
                 break;
             case AITriggerType.Temp:
                 break;
@@ -110,6 +115,7 @@ public class AI_Normal : AI
                 Attack();
                 break;
             case AITriggerType.Bullet:
+                Damaged(other.GetComponent<Bullet>().Damage);
                 break;
             case AITriggerType.Temp:
                 break;
