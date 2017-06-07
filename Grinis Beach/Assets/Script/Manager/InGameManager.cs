@@ -36,7 +36,7 @@ public class InGameManager : MonoBehaviour
 
         model.transform.parent = playerObject.transform;
 
-        model.transform.position = Vector3.zero;
+        model.transform.localPosition = Vector3.zero;
         model.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         
         playerDataContainer.PlayerAni.PlayerAnimator = model.GetComponent<Animator>();
