@@ -64,6 +64,8 @@ public abstract class AI : MonoBehaviour
         set { HealthPoint = value; if (value <= 0)this.Dead(); }
     }
 
+    protected float defaultHP;
+
     protected virtual void Awake() { }
     protected virtual void OnEnable()
     {

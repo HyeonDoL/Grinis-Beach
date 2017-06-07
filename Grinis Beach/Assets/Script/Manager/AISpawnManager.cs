@@ -30,8 +30,6 @@ public class AISpawnManager : MonoBehaviour
         {
             if (spawnData[i].x > i) continue;
             if (spawnData[i].x > GameManager.Instance.Wave) { lastSaveIndex = i; break; }
-            Debug.Log("i : " + i + "   wave : " + GameManager.Instance.Wave + "   .x : " + spawnData[i].x);
-            Debug.Log(spawnData[i]);
             for (int createCount = 0; createCount < spawnData[i].w; ++createCount)
             {
                 GameObject obj = GameObject.Instantiate(container[(int)spawnData[i].z]);

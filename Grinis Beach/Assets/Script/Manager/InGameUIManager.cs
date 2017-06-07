@@ -21,7 +21,13 @@ public class InGameUIManager : MonoBehaviour
 
     [SerializeField]
     private SpriteContainer spriteContainer;
-    
+
+    [SerializeField]
+    private GameObject BossHPLayer;
+
+    [SerializeField]
+    private RectTransform BossHPRect;
+
     private int MaxHP;
     public int MAXHP
     {
@@ -94,4 +100,12 @@ public class InGameUIManager : MonoBehaviour
 
     }
 
+    public void SetBossDisplayLayer(bool value)
+    {
+        BossHPLayer.SetActive(value);
+    }
+    public void SetBossDisplayHP(float ratio)
+    {
+        BossHPRect.localScale =  new Vector3(ratio,BossHPRect.localScale.y,BossHPRect.localScale.z);
+    }
 }

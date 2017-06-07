@@ -15,8 +15,10 @@ public class AI_Kraken : AI
     private int AttackPatternRange;
     private bool isUseNeck;
     private LayerMask myMask;
+
     protected override void Awake()
     {
+        defaultHP = HP;
         isCanMove = true;
         normalAttackCount = 0;
         Paze(1);
@@ -215,6 +217,7 @@ public class AI_Kraken : AI
 
     protected override void Spawn()
     {
+        GameManager.Instance.InGameUIManager_readonly.SetBossDisplayLayer(true);
         base.Spawn();
     }
 
@@ -226,11 +229,17 @@ public class AI_Kraken : AI
     }
     protected override void Damaged(int DMG)
     {
+        GameManager.Instance.InGameUIManager_readonly.SetBossDisplayHP(HP / defaultHP);
         base.Damaged(DMG);
         if (HP <= 100)
             Paze(3);
         else if (HP <= 200)
             Paze(2);
+    }
+    protected override void Dead()
+    {
+        base.Dead();
+        GameManager.Instance.InGameUIManager_readonly.SetBossDisplayLayer(false);
     }
     private void SetTimerToZero_Attack()
     {

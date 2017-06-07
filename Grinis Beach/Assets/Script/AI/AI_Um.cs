@@ -23,6 +23,7 @@ public class AI_Um : AI
     private int paze;
     protected override void Awake()
     {
+        defaultHP = HP;
         paze = 1;
         isCanMove = true;
         myMask = LayerMask.NameToLayer("Bullet_Monster");
@@ -142,6 +143,7 @@ public class AI_Um : AI
     }
     protected override void Damaged(int DMG)
     {
+        GameManager.Instance.InGameUIManager_readonly.SetBossDisplayHP(HP / defaultHP);
         base.Damaged(DMG);
         if (HP <= 50)
             paze = 3;
@@ -149,8 +151,14 @@ public class AI_Um : AI
             paze = 2;
     }
 
+    protected override void Dead()
+    {
+        base.Dead();
+        GameManager.Instance.InGameUIManager_readonly.SetBossDisplayLayer(false);
+    }
     protected override void Spawn()
     {
+        GameManager.Instance.InGameUIManager_readonly.SetBossDisplayLayer(true);
         base.Spawn();
     }
 
@@ -225,5 +233,4 @@ public class AI_Um : AI
         }
 
     }
-    //Vector3 targetDirection = Quaternion.Euler(0, (i * 15f - 15f), 0) * Direction;
 }
