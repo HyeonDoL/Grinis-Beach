@@ -71,4 +71,6 @@ public class PlayerStatus : MonoBehaviour
     public int Pearl { get; set; }
 
     public int Magazine { get; set; }
+
+    public GunData PlayerGun { get { return this.gunData; } }
 }

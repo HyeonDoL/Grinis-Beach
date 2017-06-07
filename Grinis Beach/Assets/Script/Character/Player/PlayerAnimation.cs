@@ -14,14 +14,16 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private CharacterHandType type;
 
+    private PlayerState prevState = PlayerState.Idle;
+
+    public Animator PlayerAnimator { set { this.playerAni = value; } }
+
+    public CharacterHandType HandType { set { playerAni.SetFloat("HandID", (float)value); } }
+
     private void Awake()
     {
         HandType = type;
     }
-
-    private PlayerState prevState = PlayerState.Idle;
-
-    public CharacterHandType HandType { set { playerAni.SetFloat("HandID", (float)value); } }
 
     public void ChangeAni(PlayerState state)
     {
