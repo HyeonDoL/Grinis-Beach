@@ -104,6 +104,7 @@ public class ObjectPoolManager : MonoBehaviour
         else
         {
             obj = Instantiate(pool.Prefab);
+            obj.transform.name = pool.Prefab.name;
             obj.transform.parent = pool.Group.transform;
         }
 
