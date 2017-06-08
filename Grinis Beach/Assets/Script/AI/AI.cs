@@ -103,7 +103,12 @@ public abstract class AI : MonoBehaviour
     {
         GameManager.Instance.gunSheet_readonly.m_data[dataIndex].fire.Fire(targetMask, Direction, startPosition, Mathf.RoundToInt(this.AttackPoint), knockback); 
     }
-    protected virtual void DropItem() { }
+    protected virtual void DropItem() 
+    {
+        GameObject pearl =  GameObject.Instantiate(GameManager.Instance.passiveItemSheet_readonly.m_data[6].prefab);
+        pearl.transform.position = this.transform.position;
+
+    }
 
     public virtual void OnChildTriggerEnter(AITriggerType type, Collider other) { }
 

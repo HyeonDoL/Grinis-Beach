@@ -52,7 +52,7 @@ public class AI_Normal : AI
         {
             case AIGunType.ShootGun: GameManager.Instance.gunSheet_readonly.m_data[2].fire.Fire(LayerMask.NameToLayer("Bullet_Monster"), Direction, this.transform.position, Mathf.RoundToInt(this.AttackPoint), 2); break;
             case AIGunType.Default: GameManager.Instance.gunSheet_readonly.m_data[0].fire.Fire(LayerMask.NameToLayer("Bullet_Monster"), Direction, this.transform.position, Mathf.RoundToInt(this.AttackPoint), 2); break;
-            case AIGunType.Boom: GameManager.Instance.gunSheet_readonly.m_data[3].fire.Fire(LayerMask.NameToLayer("Bullet_Monster"), Direction, this.transform.position, Mathf.RoundToInt(this.AttackPoint), 2); break;
+            case AIGunType.Boom: GameManager.Instance.gunSheet_readonly.m_data[1].fire.Fire(LayerMask.NameToLayer("Bullet_Monster"), Direction, this.transform.position, Mathf.RoundToInt(this.AttackPoint), 2); break;
         }
 
     }
