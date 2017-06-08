@@ -28,7 +28,7 @@ public class PlayerShot : MonoBehaviour
     private IEnumerator Shooting()
     {
         IsCanShot = false;
-
+        
         status.PlayerGun.fire.Fire(
             LayerMask.NameToLayer("Bullet_Player"),
             this.transform.forward,

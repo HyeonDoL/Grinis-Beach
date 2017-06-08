@@ -28,7 +28,7 @@ public class AISpawnManager : MonoBehaviour
     {
         for (int i = lastSaveIndex; i < spawnData.Length; ++i)
         {
-            if (spawnData[i].x > i) continue;
+            if (spawnData[i].x > i+1) continue;
             if (spawnData[i].x > GameManager.Instance.Wave) { lastSaveIndex = i; break; }
             for (int createCount = 0; createCount < spawnData[i].w; ++createCount)
             {

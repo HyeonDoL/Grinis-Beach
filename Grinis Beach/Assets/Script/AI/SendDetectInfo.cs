@@ -13,6 +13,7 @@ public class SendDetectInfo : MonoBehaviour
     {
         if (!GetCurrentSend(other.gameObject))
             return;
+
         target.OnChildTriggerEnter(myType, other);
     }
 

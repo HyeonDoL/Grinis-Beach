@@ -18,6 +18,9 @@ public class PassiveItem : Item
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
             Ability();
+            Destroy(this.gameObject); // 고치자
+        }
     }
 }

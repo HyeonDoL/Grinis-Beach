@@ -17,8 +17,7 @@ public class PlayerStatus : MonoBehaviour
     {
         container = InGameManager.Instance.PlayerDataContainer_readonly;
 
-        characterData = container.Data;
-
+        characterData = GameManager.Instance.CharacterSheet_readonly.m_data[GameManager.Instance.selectedPlayableUnit.index];
         Hp = characterData.hp;
         IsShield = true;
 
@@ -33,6 +32,7 @@ public class PlayerStatus : MonoBehaviour
         {
             if(gunSheet.m_data[count].name == characterData.firstGunName)
             {
+                Debug.Log(gunSheet.m_data[count].name + count + characterData.firstGunName);
                 gunData = gunSheet.m_data[count];
                 break;
             }
@@ -43,12 +43,25 @@ public class PlayerStatus : MonoBehaviour
     {
         get
         {
-            return this.hp;
+            return GameManager.Instance.InGameUIManager_readonly.HealthPoint;
         }
         set
         {
+            if (IsShield)
+            {
+                IsShield = false;
+                GameManager.Instance.InGameUIManager_readonly.Shell = false;
+                return;
+            }
+
+
             this.hp = value;
             GameManager.Instance.InGameUIManager_readonly.HealthPoint = hp;
+
+            if(value <= 0)
+            {
+                GameManager.Instance.END();
+            }
         }
     }
     public bool IsShield
@@ -68,7 +81,17 @@ public class PlayerStatus : MonoBehaviour
 
     public int Bomb { get; set; }
 
-    public int Pearl { get; set; }
+    public int Pearl
+    {
+        get
+        {
+            return GameManager.Instance.PearlCount;
+        }
+        set
+        {
+            GameManager.Instance.PearlCount = value;
+        }
+    }
 
     public int Magazine { get; set; }
 

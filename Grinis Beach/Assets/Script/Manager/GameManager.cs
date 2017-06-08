@@ -132,10 +132,10 @@ public class GameManager : MonoBehaviour
         //if (NowMonsterCount != 0)
         //    return;
         timer += Time.deltaTime;
-        if(timer>10)
+        if(timer>60)
         {
             //init wave
-            timer -= 10;
+            timer -= 60;
             Wave += 1;
             _NowMonsterCount = 0;
             MaxMonsterCount = 0;

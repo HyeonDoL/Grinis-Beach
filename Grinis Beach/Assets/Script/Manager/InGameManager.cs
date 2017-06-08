@@ -24,6 +24,10 @@ public class InGameManager : MonoBehaviour
 
     private GameObject playerObject;
 
+    InGameManager()
+    {
+        instance = this;
+    }
     private void Awake()
     {
         instance = this;

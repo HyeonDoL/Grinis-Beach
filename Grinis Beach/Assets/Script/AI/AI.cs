@@ -105,7 +105,13 @@ public abstract class AI : MonoBehaviour
     }
     protected virtual void DropItem() 
     {
-        GameObject pearl =  GameObject.Instantiate(GameManager.Instance.passiveItemSheet_readonly.m_data[6].prefab);
+        if(Random.Range(0,3) == 1)
+        {
+            GameObject obj = GameObject.Instantiate(GameManager.Instance.passiveItemSheet_readonly.m_data[Random.Range(0, 4)].prefab);
+            obj.transform.position = this.transform.position;
+        }
+        
+        GameObject pearl =  GameObject.Instantiate(GameManager.Instance.passiveItemSheet_readonly.m_data[0].prefab);
         pearl.transform.position = this.transform.position;
 
     }
