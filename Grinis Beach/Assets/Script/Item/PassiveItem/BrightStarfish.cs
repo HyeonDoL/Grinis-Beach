@@ -1,8 +1,12 @@
 ﻿
 public class BrightStarfish : PassiveItem
 {
-    [UnityEngine.SerializeField]
     private PlayerDataContainer container;
+
+    private void Awake()
+    {
+        container = InGameManager.Instance.PlayerDataContainer_readonly;
+    }
 
     public override string Name()
     {
