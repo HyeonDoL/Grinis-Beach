@@ -4,7 +4,6 @@ using UniRx;
 
 public class FollowPlayer : MonoBehaviour
 {
-    [SerializeField]
     private PlayerDataContainer playerContainer;
 
     private Transform playerTrans;
@@ -13,11 +12,11 @@ public class FollowPlayer : MonoBehaviour
 
     private void Awake()
     {
+        playerContainer = InGameManager.Instance.PlayerDataContainer_readonly;
+
         playerTrans = playerContainer.PlayerTrans;
 
-        distance = new Vector3(this.transform.position.x - playerTrans.position.x,
-                                        this.transform.position.y,
-                                        this.transform.position.z - playerTrans.position.z);
+        distance = this.transform.position - playerTrans.position;
 
         Observable.EveryUpdate()
             .Select(_ => playerTrans.position)

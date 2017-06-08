@@ -37,12 +37,12 @@ public class PlayerDash : MonoBehaviour
     public void Dash()
     {
         StartCoroutine(DashRoutine());
-        StartCoroutine(Timer());
     }
 
     private IEnumerator DashRoutine()
     {
         IsDash = true;
+        IsCanDash = false;
 
         float t = 0f;
 
@@ -59,10 +59,6 @@ public class PlayerDash : MonoBehaviour
         }
 
         IsDash = false;
-    }
-    private IEnumerator Timer()
-    {
-        IsCanDash = false;
 
         yield return new WaitForSeconds(gap);
 
