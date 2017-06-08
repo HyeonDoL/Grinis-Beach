@@ -23,6 +23,11 @@ public class PlayerAnimation : MonoBehaviour
     private void Awake()
     {
         HandType = type;
+
+        if(GameManager.Instance.selectedPlayableUnit.index == 2)
+        {
+            HandType = CharacterHandType.TwoHands;
+        }
     }
 
     public void ChangeAni(PlayerState state)
