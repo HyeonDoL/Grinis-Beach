@@ -17,9 +17,7 @@ public class PassiveItem : Item
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
-        {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             Ability();
-        }
     }
 }
